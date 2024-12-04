@@ -1,0 +1,50 @@
+---
+title: "BIOS6621-Homework3"
+author: "Randy"
+date: "9/24/2019"
+output: word_document
+---
+```{r message=FALSE, warning=FALSE}
+VAdata3 <- read.csv("C:/Users/Goodgolden5/Desktop/BIOS6621-Gary Grunwald/Week 04/VAdata3.csv")
+str(VAdata3)
+summary(VAdata3)
+VAdata3$proced <- as.character(VAdata3$proced)
+```
+
+
+Based on the summary of dataset DVdata, I will assume *hospcode*, *preced*, *sixmonth*, and *asa* are categorical data; and *weight*, *height*, and *bmi* are continueous variables.  
+
+I probably will change the data into related data type before further analysis, other than leave the data as integeric form.
+
+There are few things we should pay more attention: 
+
+- 1. For *hospcode*, *preced*, *sixmonth*, and *asa*, those are categorical data with integer-levels, so we do not want to see decimals or other type numiric data type here. There would be more detailed exams for these type of errors.
+
+
+- 2. There are several NA missing data in several columns.  
+
+
+- 3. Specifically for *proced*, I would assume the data should be binary varible, however the value of 2 show up. This might be just typo or maybe the data was collected for extra information, for example with both procedures or did it twice.
+
+
+
+```{r}
+qqnorm(VAdata3$weight)
+qqnorm(VAdata3$height)
+qqnorm(VAdata3$bmi)
+```
+
+_ _ _
+
+Then we can exam the normality of *$weight*, *$height*, and *$bmi*; and there are several extram values. 
+
+
+- 1. The BMI has few valules over 40, the max is 70, which seems impossible for real data. I would guess the mix used metric/imperial unit cause the problem.
+
+
+- 2. I would comfirm the unit levels for the weight and height, then correct the errors.
+
+```{r}
+VAdata3[!complete.cases(VAdata3),]
+```
+There are a few individuals with missing values. Here I list out all the missing values. I probably will confirm with the researchers or make proper assumptions before the tests, other than delete the those data.

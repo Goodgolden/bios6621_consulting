@@ -1,0 +1,79 @@
+---
+title: "BIOS6621 Homework10"
+author: "Randy"
+date: "12/3/2019"
+output:
+  word_document: default
+  html_document: default
+---
+##### Question 1A:
+```{r}
+FindPower <- function(diff, se, n, alpha){
+  power1 <- pnorm(diff/se - qnorm(1-(alpha/2)))
+  power1
+}
+FindPower(23, 15, 70, 0.05)
+sd1 <- 15*70^0.5; sd1
+```
+
+The post hoc power test result is very low, so probably it is not quite meaningful. The sample size is pretty big, so if the sample size gets bigger, the power will increase. Moreover, we do not exactly know the effect window, so probably the difference of 23 is very big in the potential project.
+
+_ _ _     
+
+
+##### Question 1B:
+```{r}
+FindPower(23, 10, 70, 0.05)
+sd2 <- 10*70^0.5; sd2
+```
+
+The post hoc power result is improved because of the smaller standard deviation. however the power of 60% is still undesirable.  
+
+Again the “detectable effect size” does not mean “biologically
+significant effect size”. 
+
+_ _ _
+
+##### Question 1C:
+```{r}
+find.power1 <- power.t.test(n = 70, sd = sd1, sig.level = 0.05, delta = 23, type = "one.sample", alternative = "two.sided")
+find.power2 <- power.t.test(n = 70, sd = sd2, sig.level = 0.05, delta = 23, type = "one.sample", alternative = "two.sided")
+find.power1$power; find.power2$power
+```
+please just ignore the R code...
+
+I think the relationship between p values and observed power is always casually related. the nonsignificant p value is always indicating the low power of the test. the post hoc power calculation will not change how we interpretate the p value. a higher power does not imply stronger evidence for a null hypothesis is not rejected. basically the p-value means same thing as the observed power for hypothesis test.
+_ _ _ 
+
+##### Question 1D:
+we can construct an accurate confidence interval, if the power calculations yield no interest and insight. if the power calculation of hypothesis test falls outside of the confidence interval (the data already told us, it is impossible to detect the difference), then it is meaningless. 
+
+This is a paper by John M. HOENIG and Dennis M. HEISEY
+"The Abuse of Power: The Pervasive Fallacy of Power Calculations for Data Analysis"      
+In this paper, they suggest "cumulative distribution function (cdf) of the p value" 
+
+And "focus on characterizing which parameter values are supported by the data by emphasizing con dence intervals more and placing less emphasis on hypothesis testing."     
+"In any particular analysis, one needs to ask whether it is
+more appropriate to use the no di¡erence null hypothesis
+rather than the nonequivalence null hypothesis."
+
+_ _ _ 
+
+
+###### Question2A:
+```{r}
+FindPower(23, 10, 90, 0.05)
+find.power3 <- power.t.test(n = 90, sd = sd2, sig.level = 0.05, delta = 23, type = "one.sample", alternative = "two.sided")
+find.power2$power
+find.power3$power
+```
+the observed power is improved in the new case, but still not very appropriate to detect the difference.
+
+_ _ _
+
+
+###### Question2B:
+From totally critical thinking points of view, we should always keep a mind on other people's results. The tests and background might  various, it is always safe to think about the problem in our situation. Maybe 70 is enough, but not good enough to detect more subtle difference. It is nice to have a reference from other people's research, but a larger sample size is always benefite for our research. And probably we can find something interesting for the extra 20 people in the research?
+
+
+

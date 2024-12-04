@@ -1,0 +1,30 @@
+---
+title: "BIOS6621-Homework8-Randy"
+author: "Randy"
+date: "11/19/2019"
+output: word_document
+---
+
+#### Question1
+```{r}
+Alfuzo <- c(1,1,2,2,3,1,0,3,3,2,5,2,1,3,2,1,1,2,1,2,2,2,2,1,1,5,1,2,3,1,2,5,1,5,3,3,3,2,5,2,3,4,3,4,5,3,4,3,2,3,5,2,2,3)
+NonAlfuzo <- c(10, 7, 4, 4, 3, 5, 6, 7, 7, 3, 5, 2, 4, 4, 6, 3, 6, 2, 5, 3, 5, 2, 4, 2, 3, 6, 4, 5, 4, 7, 4, 3, 3, 4, 2, 4, 4,3)
+
+hist(Alfuzo, main = "Alfuzosin")
+hist(NonAlfuzo, main = "Off Alfuzosin")
+```
+```{r}
+par(mfrow=c(1, 2))
+boxplot(Alfuzo, main = "Alfuzosin")
+boxplot(NonAlfuzo, main = "Off Alfuzosin")
+```
+```{r}
+wilcox.test(Alfuzo, NonAlfuzo)
+```
+
+Both distributions are not normal and right skewed. 
+There is also outlier in the “Non-Alfuzosin” group.
+Hence the nonparametric test would be appropriate. 
+The Wilcoxon Rank Sum Test provides a p-value that is <0.05; this result shows that there is a statistically signifiant difference between the groups of Alfuzosin and Non-Alfuzosin. 
+We need to consider the side effects besides make decisions about whether actually use Alfuzosin.
+
